@@ -12,48 +12,7 @@
 上面的示例图是我把**ItemView**分别用了**TextView**和**ImageView**。其实这些是没什么好说的，主要是如何定义这样的**LayoutManager**。相信大家都用过了**LinearLayoutManager**吧，系统提供的**LayoutManager**都是对齐的方式进行排版的，我们这里的**flow**的样式就是在排版**item**之前，判断了该行多余的空间还够不够显示，如果不够直接换行显示的思路。
 
 
-<pre><code>
-package com.library.flowlayout;
 
-import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by xiangcheng on 17/3/18.
- * 一种流式布局的LayoutManager
- */
-
-public class FlowLayoutManager extends RecyclerView.LayoutManager {
-
-    final FlowLayoutManager self = this;
-
-    private int width, height;
-    private int left, top, right;
-    //最大容器的宽度
-    private int usedMaxWidth;
-    //竖直方向上的偏移量
-    private int verticalScrollOffset = 0;
-    //计算显示的内容的高度
-    private int totalHeight = 0;
-    private Row row = new Row();
-
-    //保存所有的Item的上下左右的偏移量信息
-    private SparseArray<Rect> allItemFrames = new SparseArray<>();
-
-
-    public class Item {
-        int useHeight;
-        View view;
-
-        public Item(int useHeight, View view) {
-            this.useHeight = useHeight;
             this.view = view;
 
         }
@@ -298,6 +257,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
 ###关于我:
 
-**email:**a1002326270@163.com
+**email:** a1002326270@163.com
 
-**github:**[enter](https://github.com/1002326270xc/LayoutManager-FlowLayout)
+**简书:** 

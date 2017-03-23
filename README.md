@@ -12,7 +12,7 @@
 上面的示例图是我把**ItemView**分别用了**TextView**和**ImageView**。其实这些是没什么好说的，主要是如何定义这样的**LayoutManager**。相信大家都用过了**LinearLayoutManager**吧，系统提供的**LayoutManager**都是对齐的方式进行排版的，我们这里的**flow**的样式就是在排版**item**之前，判断了该行多余的空间还够不够显示，如果不够直接换行显示的思路。
 
 
-<pre><code>```
+<pre><code>
 package com.library.flowlayout;
 
 import android.graphics.Rect;
@@ -293,8 +293,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 }
 
 
-```</code></pre>
+</code></pre>
+
 
 ###关于我:
+
 **email:**a1002326270@163.com
+
 **github:**[enter](https://github.com/1002326270xc/LayoutManager-FlowLayout)

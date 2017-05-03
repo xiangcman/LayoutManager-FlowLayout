@@ -1,9 +1,7 @@
 package com.library.flowlayout;
 
-import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,9 +26,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     //计算显示的内容的高度
     private int totalHeight = 0;
     private Row row = new Row();
-
-    //保存所有的Item的上下左右的偏移量信息
-    private SparseArray<Rect> allItemFrames = new SparseArray<>();
 
     public class Item {
         int useHeight;
@@ -75,23 +70,18 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        if (getItemCount() == 0) {
-            detachAndScrapAttachedViews(recycler);
-            return;
-        }
         if (state.isPreLayout()) {
             return;
         }
-        if (getChildCount() == 0) {
-            width = getWidth();
-            height = getHeight();
-            Log.d("TAG", "widthSize:" + width + ",heightSize:" + height);
-            left = getPaddingLeft();
-            right = getPaddingRight();
-            top = getPaddingTop();
-            usedMaxWidth = width - left - right;
-        }
+        detachAndScrapAttachedViews(recycler);
+        width = getWidth();
+        height = getHeight();
         totalHeight = 0;
+        Log.d("TAG", "widthSize:" + width + ",heightSize:" + height);
+        left = getPaddingLeft();
+        right = getPaddingRight();
+        top = getPaddingTop();
+        usedMaxWidth = width - left - right;
         int cuLineTop = top;
         //当前行使用的宽度
         int cuLineWidth = 0;
@@ -101,6 +91,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         row.clear();
         for (int i = 0; i < getItemCount(); i++) {
             View childAt = recycler.getViewForPosition(i);
+            addView(childAt);
             if (View.GONE == childAt.getVisibility()) {
                 continue;
             }
@@ -121,12 +112,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             if (cuLineWidth + childUseWidth <= usedMaxWidth) {
                 itemLeft = left + cuLineWidth + leftMargin;
                 itemTop = cuLineTop + topMargin;
-                Rect frame = allItemFrames.get(i);
-                if (frame == null) {
-                    frame = new Rect();
-                }
-                frame.set(itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
-                allItemFrames.put(i, frame);
+                layoutDecoratedWithMargins(childAt, itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
                 cuLineWidth += childUseWidth;
                 maxHeightItem = Math.max(maxHeightItem, childUseHeight);
                 row.addViews(new Item(childUseHeight, childAt));
@@ -140,12 +126,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 itemTop = cuLineTop + topMargin;
                 itemLeft = left + leftMargin;
                 Log.d("TAG", "itemTop:" + itemTop);
-                Rect frame = allItemFrames.get(i);
-                if (frame == null) {
-                    frame = new Rect();
-                }
-                frame.set(itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
-                allItemFrames.put(i, frame);
+                layoutDecoratedWithMargins(childAt, itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
                 cuLineWidth = childUseWidth;
                 maxHeightItem = childUseHeight;
                 row.addViews(new Item(childUseHeight, childAt));
@@ -160,54 +141,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
         }
         totalHeight = Math.max(totalHeight, getVerticalSpace());
-        fillLayout(recycler, state);
-    }
-
-    private void fillLayout(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        if (state.isPreLayout()) { // 跳过preLayout，preLayout主要用于支持动画
-            return;
-        }
-
-        // 当前scroll offset状态下的显示区域
-        Rect displayFrame = new Rect(0, verticalScrollOffset, getHorizontalSpace(), verticalScrollOffset + getVerticalSpace());
-
-        /**
-         * 将滑出屏幕的Items回收到Recycle缓存中
-         */
-        Rect childFrame = new Rect();
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            childFrame.left = getDecoratedLeft(child);
-            childFrame.top = getDecoratedTop(child);
-            childFrame.right = getDecoratedRight(child);
-            childFrame.bottom = getDecoratedBottom(child);
-            //如果Item没有在显示区域，就说明需要回收
-            if (!Rect.intersects(displayFrame, childFrame)) {
-                //回收掉滑出屏幕的View
-                removeAndRecycleView(child, recycler);
-
-            }
-        }
-
-        //重新显示需要出现在屏幕的子View
-        for (int i = 0; i < getItemCount(); i++) {
-
-            if (Rect.intersects(displayFrame, allItemFrames.get(i))) {
-
-                View scrap = recycler.getViewForPosition(i);
-                measureChildWithMargins(scrap, 0, 0);
-                addView(scrap);
-
-                Rect frame = allItemFrames.get(i);
-                //将这个item布局出来
-                layoutDecoratedWithMargins(scrap,
-                        frame.left,
-                        frame.top - verticalScrollOffset,
-                        frame.right,
-                        frame.bottom - verticalScrollOffset);
-
-            }
-        }
     }
 
     /**
@@ -217,15 +150,10 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         List<Item> views = row.views;
         for (int i = 0; i < views.size(); i++) {
             View view = views.get(i).view;
-            int position = getPosition(view);
-            if (allItemFrames.get(position).top < row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2) {
-                Rect frame = allItemFrames.get(position);
-                if (frame == null) {
-                    frame = new Rect();
-                }
-                frame.set(allItemFrames.get(position).left, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2), allItemFrames.get(position).right, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2 + getDecoratedMeasuredHeight(view)));
-                allItemFrames.put(position, frame);
-
+            if (getDecoratedTop(view) < row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2) {
+                layoutDecoratedWithMargins(view, getDecoratedLeft(view),
+                        (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2), getDecoratedRight(view),
+                        (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2 + getDecoratedMeasuredHeight(view)));
             }
         }
         row.clear();
@@ -262,16 +190,12 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
         // 平移容器内的item
         offsetChildrenVertical(-travel);
-        fillLayout(recycler, state);
+
         return travel;
     }
 
     private int getVerticalSpace() {
         return self.getHeight() - self.getPaddingBottom() - self.getPaddingTop();
-    }
-
-    public int getHorizontalSpace() {
-        return self.getWidth() - self.getPaddingLeft() - self.getPaddingRight();
     }
 
 }

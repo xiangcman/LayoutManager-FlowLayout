@@ -82,7 +82,7 @@ public class TextFlowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flow_layout);
         RecyclerView viewById = (RecyclerView) findViewById(flow);
-        viewById.setLayoutManager(new FlowLayoutManager());
+        viewById.setLayoutManager(new FlowLayoutManager(this));
         viewById.setAdapter(new FlowAdapter());
     }
 

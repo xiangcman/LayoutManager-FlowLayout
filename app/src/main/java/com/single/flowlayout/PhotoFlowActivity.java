@@ -51,7 +51,7 @@ public class PhotoFlowActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_flow);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.photo_layout);
-        viewById.setLayoutManager(new FlowLayoutManager());
+        viewById.setLayoutManager(new FlowLayoutManager(this));
         viewById.setAdapter(new FlowAdapter());
     }
 

@@ -1,5 +1,7 @@
 package com.library.flowlayout;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +17,6 @@ import java.util.List;
 
 public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
-    final FlowLayoutManager self = this;
-
     private int width, height;
     private int left, top, right;
     //最大容器的宽度
@@ -26,6 +26,12 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     //计算显示的内容的高度
     private int totalHeight = 0;
     private Row row = new Row();
+
+    public FlowLayoutManager(Context context) {
+        this.context = context;
+    }
+
+    private Context context;
 
     public class Item {
         int useHeight;
@@ -103,9 +109,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             int leftMargin = params.leftMargin;
             int bottomMargin = params.bottomMargin;
             int topMargin = params.topMargin;
-            Log.d("TAG", "rightMargin:" + rightMargin + ",leftMargin:" + leftMargin + ",bottomMargin:" + bottomMargin + ",topMargin:" + topMargin);
-            Log.d("TAG", "childWidth:" + childWidth);
-            Log.d("TAG", "childHeight:" + childHeight);
             int childUseWidth = childWidth + leftMargin + rightMargin;
             int childUseHeight = childHeight + topMargin + bottomMargin;
             //如果加上当前的item还小于最大的宽度的话
@@ -125,7 +128,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 totalHeight += maxHeightItem;
                 itemTop = cuLineTop + topMargin;
                 itemLeft = left + leftMargin;
-                Log.d("TAG", "itemTop:" + itemTop);
                 layoutDecoratedWithMargins(childAt, itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
                 cuLineWidth = childUseWidth;
                 maxHeightItem = childUseHeight;
@@ -195,7 +197,31 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     }
 
     private int getVerticalSpace() {
-        return self.getHeight() - self.getPaddingBottom() - self.getPaddingTop();
+        return height - getPaddingBottom() - getPaddingTop();
     }
 
+    @Override
+    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
+        Log.d("TAG", "onMeasure");
+        int widthMode = View.MeasureSpec.getMode(widthSpec);
+        int measureWidth = View.MeasureSpec.getSize(widthSpec);
+        int heightMode = View.MeasureSpec.getMode(heightSpec);
+        int measureHeight = View.MeasureSpec.getSize(heightSpec);
+        if (widthMode == View.MeasureSpec.EXACTLY) {
+            width = measureWidth;
+        } else {
+            //以实际屏宽为标准
+            width = context.getResources().getDisplayMetrics().widthPixels;
+        }
+        if (heightMode == View.MeasureSpec.EXACTLY) {
+            height = measureHeight;
+            Log.d("TAG", "规则的");
+        } else {
+            //以实际屏高为标准
+            Log.d("TAG", "不规则的");//这里就去
+            int contentHeight = ((Activity) context).findViewById(android.R.id.content).getHeight();
+            height = Math.min(totalHeight, contentHeight);
+        }
+        setMeasuredDimension(width, height);
+    }
 }

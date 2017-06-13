@@ -54,7 +54,8 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
             "17.PL/SQL",
             "18.Delphi/Object Pascal",
             "19.Ada",
-            "20.MATLAB", "1.C",
+            "20.MATLAB",
+            "1.C",
             "2.Java",
             "3.Objective-C",
             "4.C++",
@@ -80,7 +81,7 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flow_layout);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.flow);
-        viewById.setLayoutManager(new FlowLayoutManager());
+        viewById.setLayoutManager(new FlowLayoutManager(this));
         viewById.setAdapter(new FlowAdapter());
     }
 

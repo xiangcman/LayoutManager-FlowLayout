@@ -17,6 +17,7 @@ import java.util.List;
 
 public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
+    private static final String TAG = FlowLayoutManager.class.getSimpleName();
     private int width, height;
     private int left, top, right;
     //最大容器的宽度
@@ -26,12 +27,17 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     //计算显示的内容的高度
     private int totalHeight = 0;
     private Row row = new Row();
+    private int margin;
 
     public FlowLayoutManager(Context context) {
         this.context = context;
     }
 
     private Context context;
+
+    public void setMargin(int margin) {
+        this.margin = margin;
+    }
 
     public class Item {
         int useHeight;
@@ -83,7 +89,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         width = getWidth();
         height = getHeight();
         totalHeight = 0;
-        Log.d("TAG", "widthSize:" + width + ",heightSize:" + height);
         left = getPaddingLeft();
         right = getPaddingRight();
         top = getPaddingTop();
@@ -104,11 +109,12 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             measureChildWithMargins(childAt, 0, 0);
             int childWidth = getDecoratedMeasuredWidth(childAt);
             int childHeight = getDecoratedMeasuredHeight(childAt);
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) childAt.getLayoutParams();
-            int rightMargin = params.rightMargin;
-            int leftMargin = params.leftMargin;
-            int bottomMargin = params.bottomMargin;
-            int topMargin = params.topMargin;
+            Log.d(TAG, "childHeight:" + childHeight);
+            int rightMargin = margin;
+            int leftMargin = margin;
+            int bottomMargin = margin;
+            int topMargin = margin;
+            Log.d(TAG, "topMargin:" + topMargin);
             int childUseWidth = childWidth + leftMargin + rightMargin;
             int childUseHeight = childHeight + topMargin + bottomMargin;
             //如果加上当前的item还小于最大的宽度的话
@@ -152,10 +158,10 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         List<Item> views = row.views;
         for (int i = 0; i < views.size(); i++) {
             View view = views.get(i).view;
-            if (getDecoratedTop(view) < row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2) {
+            if (views.get(i).useHeight < row.maxHeight) {
                 layoutDecoratedWithMargins(view, getDecoratedLeft(view),
-                        (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2), getDecoratedRight(view),
-                        (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2 + getDecoratedMeasuredHeight(view)));
+                        (int) (row.cuTop + (row.maxHeight - getDecoratedMeasuredHeight(view)) / 2), getDecoratedRight(view),
+                        (int) (row.cuTop + (row.maxHeight - getDecoratedMeasuredHeight(view)) / 2 + getDecoratedMeasuredHeight(view)));
             }
         }
         row.clear();

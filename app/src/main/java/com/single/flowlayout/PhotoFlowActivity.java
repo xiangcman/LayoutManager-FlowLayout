@@ -3,6 +3,7 @@ package com.single.flowlayout;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,7 +52,9 @@ public class PhotoFlowActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_flow);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.photo_layout);
-        viewById.setLayoutManager(new FlowLayoutManager(this));
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(this);
+        flowLayoutManager.setMargin(dp2px(10));
+        viewById.setLayoutManager(flowLayoutManager);
         viewById.setAdapter(new FlowAdapter());
     }
 
@@ -100,5 +103,9 @@ public class PhotoFlowActivity extends Activity {
                 img = (ImageView) itemView.findViewById(R.id.flow_img);
             }
         }
+    }
+
+    private int dp2px(float value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 }

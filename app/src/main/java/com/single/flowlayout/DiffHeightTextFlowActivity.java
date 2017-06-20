@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -81,7 +82,9 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flow_layout);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.flow);
-        viewById.setLayoutManager(new FlowLayoutManager(this));
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(this);
+        flowLayoutManager.setMargin(dp2px(10));
+        viewById.setLayoutManager(flowLayoutManager);
         viewById.setAdapter(new FlowAdapter());
     }
 
@@ -141,5 +144,9 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
                 text = (TextView) itemView.findViewById(R.id.flow_text);
             }
         }
+    }
+
+    private int dp2px(float value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 }

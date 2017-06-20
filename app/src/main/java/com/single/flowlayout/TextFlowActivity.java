@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -81,9 +82,11 @@ public class TextFlowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flow_layout);
-        RecyclerView viewById = (RecyclerView) findViewById(flow);
-        viewById.setLayoutManager(new FlowLayoutManager(this));
-        viewById.setAdapter(new FlowAdapter());
+        RecyclerView recyclerView = (RecyclerView) findViewById(flow);
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(this);
+        flowLayoutManager.setMargin(dp2px(10));
+        recyclerView.setLayoutManager(flowLayoutManager);
+        recyclerView.setAdapter(new FlowAdapter());
     }
 
     class FlowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -126,5 +129,9 @@ public class TextFlowActivity extends AppCompatActivity {
                 text = (TextView) itemView.findViewById(R.id.flow_text);
             }
         }
+    }
+
+    private int dp2px(float value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 }

@@ -226,7 +226,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             //以实际屏高为标准
             Log.d("TAG", "不规则的");//这里就去
             int contentHeight = ((Activity) context).findViewById(android.R.id.content).getHeight();
-            height = Math.min(totalHeight, contentHeight);
+            height = Math.min(totalHeight + getPaddingTop() + getPaddingBottom(), contentHeight);
         }
         setMeasuredDimension(width, height);
     }

@@ -1,6 +1,5 @@
 package com.library.flowlayout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,12 +28,13 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private Row row = new Row();
     private int margin;
 
-    public FlowLayoutManager(Context context) {
-        this.context = context;
+    public FlowLayoutManager() {
+        setAutoMeasureEnabled(true);
     }
 
     private Context context;
 
+    //设置间距的方法
     public void setMargin(int margin) {
         this.margin = margin;
     }
@@ -182,7 +182,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
                                   RecyclerView.State state) {
 
-        Log.d("TAG", "totalHeight:" + totalHeight);
         //实际要滑动的距离
         int travel = dy;
 
@@ -206,28 +205,4 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         return height - getPaddingBottom() - getPaddingTop();
     }
 
-    @Override
-    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
-        Log.d("TAG", "onMeasure");
-        int widthMode = View.MeasureSpec.getMode(widthSpec);
-        int measureWidth = View.MeasureSpec.getSize(widthSpec);
-        int heightMode = View.MeasureSpec.getMode(heightSpec);
-        int measureHeight = View.MeasureSpec.getSize(heightSpec);
-        if (widthMode == View.MeasureSpec.EXACTLY) {
-            width = measureWidth;
-        } else {
-            //以实际屏宽为标准
-            width = context.getResources().getDisplayMetrics().widthPixels;
-        }
-        if (heightMode == View.MeasureSpec.EXACTLY) {
-            height = measureHeight;
-            Log.d("TAG", "规则的");
-        } else {
-            //以实际屏高为标准
-            Log.d("TAG", "不规则的");//这里就去
-            int contentHeight = ((Activity) context).findViewById(android.R.id.content).getHeight();
-            height = Math.min(totalHeight + getPaddingTop() + getPaddingBottom(), contentHeight);
-        }
-        setMeasuredDimension(width, height);
-    }
 }

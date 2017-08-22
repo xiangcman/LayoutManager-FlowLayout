@@ -20,7 +20,7 @@
 RecyclerView recyclerView = (RecyclerView) findViewById(flow);
 FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
 //设置每一个item间距
-flowLayoutManager.setMargin(dp2px(10));
+recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
 recyclerView.setLayoutManager(flowLayoutManager);
 recyclerView.setAdapter(new FlowAdapter());
 ```

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.library.flowlayout.FlowLayoutManager;
+import com.library.flowlayout.SpaceItemDecoration;
 
 import java.util.Random;
 
@@ -83,7 +84,7 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
         setContentView(R.layout.flow_layout);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.flow);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-        flowLayoutManager.setMargin(dp2px(10));
+        viewById.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         viewById.setLayoutManager(flowLayoutManager);
         viewById.setAdapter(new FlowAdapter());
     }

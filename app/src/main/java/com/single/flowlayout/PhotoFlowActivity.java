@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.library.flowlayout.FlowLayoutManager;
+import com.library.flowlayout.SpaceItemDecoration;
 
 /**
  * Created by xiangcheng on 17/3/19.
@@ -53,7 +54,7 @@ public class PhotoFlowActivity extends Activity {
         setContentView(R.layout.activity_photo_flow);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.photo_layout);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-        flowLayoutManager.setMargin(dp2px(10));
+        viewById.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         viewById.setLayoutManager(flowLayoutManager);
         viewById.setAdapter(new FlowAdapter());
     }

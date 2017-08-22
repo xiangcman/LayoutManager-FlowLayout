@@ -1,6 +1,5 @@
 package com.library.flowlayout;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -26,17 +25,9 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     //计算显示的内容的高度
     private int totalHeight = 0;
     private Row row = new Row();
-    private int margin;
 
     public FlowLayoutManager() {
         setAutoMeasureEnabled(true);
-    }
-
-    private Context context;
-
-    //设置间距的方法
-    public void setMargin(int margin) {
-        this.margin = margin;
     }
 
     public class Item {
@@ -110,17 +101,12 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             int childWidth = getDecoratedMeasuredWidth(childAt);
             int childHeight = getDecoratedMeasuredHeight(childAt);
             Log.d(TAG, "childHeight:" + childHeight);
-            int rightMargin = margin;
-            int leftMargin = margin;
-            int bottomMargin = margin;
-            int topMargin = margin;
-            Log.d(TAG, "topMargin:" + topMargin);
-            int childUseWidth = childWidth + leftMargin + rightMargin;
-            int childUseHeight = childHeight + topMargin + bottomMargin;
+            int childUseWidth = childWidth;
+            int childUseHeight = childHeight;
             //如果加上当前的item还小于最大的宽度的话
             if (cuLineWidth + childUseWidth <= usedMaxWidth) {
-                itemLeft = left + cuLineWidth + leftMargin;
-                itemTop = cuLineTop + topMargin;
+                itemLeft = left + cuLineWidth;
+                itemTop = cuLineTop;
                 layoutDecoratedWithMargins(childAt, itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
                 cuLineWidth += childUseWidth;
                 maxHeightItem = Math.max(maxHeightItem, childUseHeight);
@@ -132,8 +118,8 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 formatAboveRow();
                 cuLineTop += maxHeightItem;
                 totalHeight += maxHeightItem;
-                itemTop = cuLineTop + topMargin;
-                itemLeft = left + leftMargin;
+                itemTop = cuLineTop;
+                itemLeft = left;
                 layoutDecoratedWithMargins(childAt, itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
                 cuLineWidth = childUseWidth;
                 maxHeightItem = childUseHeight;

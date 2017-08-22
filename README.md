@@ -13,6 +13,17 @@
 ![RecyclerView-LayoutManager-Image.gif](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/RecyclerView-LayoutManager-Image.gif)
 
 上面的示例图是我把**ItemView**分别用了**TextView**和**ImageView**。其实这些是没什么好说的，主要是如何定义这样的**LayoutManager**。相信大家都用过了**LinearLayoutManager**吧，系统提供的**LayoutManager**都是对齐的方式进行排版的，我们这里的**flow**的样式就是在排版**item**之前，判断了该行多余的空间还够不够显示，如果不够直接换行显示的思路。
+
+### 使用:
+**详见[TextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/TextFlowActivity.java)、[DiffHeightTextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/DiffHeightTextFlowActivity.java)、[PhotoFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/PhotoFlowActivity.java)**
+```
+RecyclerView recyclerView = (RecyclerView) findViewById(flow);
+FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+//设置每一个item间距
+flowLayoutManager.setMargin(dp2px(10));
+recyclerView.setLayoutManager(flowLayoutManager);
+recyclerView.setAdapter(new FlowAdapter());
+```
          
        
 ### 关于我:

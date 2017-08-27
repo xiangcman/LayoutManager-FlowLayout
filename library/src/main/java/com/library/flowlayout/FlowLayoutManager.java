@@ -86,7 +86,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         if (getChildCount() == 0) {
             width = getWidth();
             height = getHeight();
-            Log.d("TAG", "widthSize:" + width + ",heightSize:" + height);
             left = getPaddingLeft();
             right = getPaddingRight();
             top = getPaddingTop();
@@ -133,7 +132,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 totalHeight += maxHeightItem;
                 itemTop = cuLineTop;
                 itemLeft = left;
-                Log.d("TAG", "itemTop:" + itemTop);
                 Rect frame = allItemFrames.get(i);
                 if (frame == null) {
                     frame = new Rect();
@@ -185,24 +183,16 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         //重新显示需要出现在屏幕的子View
 
         for (int j = 0; j < lineRows.size(); j++) {
-            Log.d("TAG", "J:" + j);
             Row row = lineRows.get(j);
             float lineTop = row.cuTop;
             float lineBottom = lineTop + row.maxHeight;
-            Log.d("TAG", "lineTop:" + lineTop);
-            Log.d("TAG", "lineBottom:" + lineBottom);
-            Log.d("TAG", "displayFrame.bottom:" + displayFrame.bottom);
-            Log.d("TAG", "displayFrame.top:" + displayFrame.top);
-
             if (lineTop < displayFrame.bottom && displayFrame.top < lineBottom) {
                 List<Item> views = row.views;
-                Log.d(TAG, "views.size:" + views.size());
                 for (int i = 0; i < views.size(); i++) {
                     View scrap = views.get(i).view;
                     measureChildWithMargins(scrap, 0, 0);
                     addView(scrap);
                     Rect frame = views.get(i).rect;
-
                     //将这个item布局出来
                     layoutDecoratedWithMargins(scrap,
                             frame.left,
@@ -232,9 +222,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
             }
         }
-        Row lineRow = row;
-        Log.d(TAG, "lineRow:" + lineRow.cuTop);
-        lineRows.add(lineRow);
+        lineRows.add(row);
         row = new Row();
     }
 

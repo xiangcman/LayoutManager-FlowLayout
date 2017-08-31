@@ -41,6 +41,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     public class Item {
         int useHeight;
         View view;
+
+        public void setRect(Rect rect) {
+            this.rect = rect;
+        }
+
         Rect rect;
 
         public Item(int useHeight, View view, Rect rect) {
@@ -76,6 +81,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.d(TAG, "onLayoutChildren");
         if (getItemCount() == 0) {
             detachAndScrapAttachedViews(recycler);
             return;
@@ -100,6 +106,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         int maxHeightItem = 0;
         row = new Row();
         for (int i = 0; i < getItemCount(); i++) {
+            Log.d(TAG, "index:" + i);
             View childAt = recycler.getViewForPosition(i);
             if (View.GONE == childAt.getVisibility()) {
                 continue;
@@ -107,7 +114,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             measureChildWithMargins(childAt, 0, 0);
             int childWidth = getDecoratedMeasuredWidth(childAt);
             int childHeight = getDecoratedMeasuredHeight(childAt);
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) childAt.getLayoutParams();
             int childUseWidth = childWidth;
             int childUseHeight = childHeight;
             //如果加上当前的item还小于最大的宽度的话
@@ -161,24 +167,8 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         }
 
         // 当前scroll offset状态下的显示区域
-        Rect displayFrame = new Rect(0, verticalScrollOffset, getHorizontalSpace(), verticalScrollOffset + getVerticalSpace());
-
-        /**
-         * 将滑出屏幕的Items回收到Recycle缓存中
-         */
-        Rect childFrame = new Rect();
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            childFrame.left = getDecoratedLeft(child);
-            childFrame.top = getDecoratedTop(child);
-            childFrame.right = getDecoratedRight(child);
-            childFrame.bottom = getDecoratedBottom(child);
-            //如果Item没有在显示区域，就说明需要回收
-            if (!Rect.intersects(displayFrame, childFrame)) {
-                //回收掉滑出屏幕的View
-                removeAndRecycleView(child, recycler);
-            }
-        }
+        Rect displayFrame = new Rect(getPaddingLeft(), getPaddingTop() + verticalScrollOffset,
+                getWidth() - getPaddingRight(), verticalScrollOffset + (getHeight() - getPaddingBottom()));
 
         //重新显示需要出现在屏幕的子View
 
@@ -200,6 +190,13 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                             frame.right,
                             frame.bottom - verticalScrollOffset);
                 }
+            } else {
+                //将不在屏幕中的item放到缓存中
+                List<Item> views = row.views;
+                for (int i = 0; i < views.size(); i++) {
+                    View scrap = views.get(i).view;
+                    removeAndRecycleView(scrap, recycler);
+                }
             }
         }
     }
@@ -210,7 +207,8 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private void formatAboveRow() {
         List<Item> views = row.views;
         for (int i = 0; i < views.size(); i++) {
-            View view = views.get(i).view;
+            Item item = views.get(i);
+            View view = item.view;
             int position = getPosition(view);
             if (allItemFrames.get(position).top < row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2) {
                 Rect frame = allItemFrames.get(position);
@@ -219,9 +217,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 }
                 frame.set(allItemFrames.get(position).left, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2), allItemFrames.get(position).right, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2 + getDecoratedMeasuredHeight(view)));
                 allItemFrames.put(position, frame);
-
+                item.setRect(frame);
+                views.set(i, item);
             }
         }
+        row.views = views;
         lineRows.add(row);
         row = new Row();
     }

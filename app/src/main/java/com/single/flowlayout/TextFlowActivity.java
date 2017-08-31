@@ -104,28 +104,20 @@ public class TextFlowActivity extends AppCompatActivity {
         final RecyclerView recyclerView = (RecyclerView) findViewById(flow);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(flowLayoutManager);
         list.addAll(Arrays.asList(arrays));
         recyclerView.setAdapter(flowAdapter = new FlowAdapter(list));
         //模拟网络的代码
-//         handler.postDelayed(new Runnable() {
-//             @Override
-//             public void run() {
-//                 list.add("11.Ruby");
-//                 list.add("12.Visual Basic .NET");
-//                 list.add("12.Visual Basic .NET");
-//                 list.add("7.(Visual) Basic");
-//                 list.add("4.C++");
-//                 list.add("11.Ruby");
-//                 list.add("12.Visual Basic .NET");
-//                 list.add("12.Visual Basic .NET");
-//                 list.add("7.(Visual) Basic");
-//                 list.add("4.C++");
-//                 flowAdapter.notifyDataSetChanged();
-//                 Log.d(TAG, "refresh");
-//             }
-//         }, 2000);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int start = list.size();
+                list.add("11.新增的");
+                list.add("12.新增的");
+                list.add("12.新增的");
+                flowAdapter.notifyDataSetChanged();
+            }
+        }, 2000);
     }
 
     class FlowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

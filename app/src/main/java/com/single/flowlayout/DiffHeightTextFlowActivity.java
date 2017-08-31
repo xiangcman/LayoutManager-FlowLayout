@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import com.library.flowlayout.FlowLayoutManager;
 import com.library.flowlayout.SpaceItemDecoration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class DiffHeightTextFlowActivity extends AppCompatActivity {
@@ -78,6 +82,10 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
             "19.Ada",
             "20.MATLAB", "20.MATLAB"};
 
+    private Handler handler = new Handler();
+    private List<String> list = new ArrayList<>();
+    private FlowAdapter flowAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +94,18 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         viewById.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         viewById.setLayoutManager(flowLayoutManager);
-        viewById.setAdapter(new FlowAdapter());
+        list.addAll(Arrays.asList(arrays));
+        viewById.setAdapter(flowAdapter = new FlowAdapter(list));
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int start = list.size();
+                list.add("11.新增的");
+                list.add("12.新增的");
+                list.add("12.新增的");
+                flowAdapter.notifyDataSetChanged();
+            }
+        }, 2000);
     }
 
     class FlowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -94,6 +113,12 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
         private static final int TYPE_HEIGER = 1;
         private static final int TYPE_NORMAL = 2;
         SparseArray<Drawable> allDrawAble = new SparseArray<>();
+
+        private List<String> list;
+
+        public FlowAdapter(List<String> list) {
+            this.list = list;
+        }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -121,7 +146,7 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
                 allDrawAble.put(position, getBack());
             }
             textView.setBackgroundDrawable(allDrawAble.get(position));
-            textView.setText(arrays[position]);
+            textView.setText(list.get(position));
         }
 
         private Drawable getBack() {
@@ -133,7 +158,7 @@ public class DiffHeightTextFlowActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return arrays.length;
+            return list.size();
         }
 
         class MyHolder extends RecyclerView.ViewHolder {

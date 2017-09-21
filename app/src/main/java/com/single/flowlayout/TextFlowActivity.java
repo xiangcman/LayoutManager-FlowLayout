@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
@@ -112,10 +111,15 @@ public class TextFlowActivity extends AppCompatActivity {
             @Override
             public void run() {
                 int start = list.size();
-                list.add("11.新增的");
-                list.add("12.新增的");
-                list.add("12.新增的");
-                flowAdapter.notifyDataSetChanged();
+                //处理新增的实例
+//                list.add("11.新增的");
+//                list.add("12.新增的");
+//                list.add("12.新增的");
+//                flowAdapter.notifyDataSetChanged();
+                //处理清空的实例
+                int size = list.size();
+                list.clear();
+                flowAdapter.notifyItemMoved(0, size);
             }
         }, 2000);
     }

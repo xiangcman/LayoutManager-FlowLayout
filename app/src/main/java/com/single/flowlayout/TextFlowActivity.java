@@ -119,7 +119,17 @@ public class TextFlowActivity extends AppCompatActivity {
                 //处理清空的实例
                 int size = list.size();
                 list.clear();
-                flowAdapter.notifyItemMoved(0, size);
+                flowAdapter.notifyDataSetChanged();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //处理清空的实例
+                        list.add("11.新增的");
+                        list.add("12.新增的");
+                        list.add("12.新增的");
+                        flowAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
             }
         }, 2000);
     }

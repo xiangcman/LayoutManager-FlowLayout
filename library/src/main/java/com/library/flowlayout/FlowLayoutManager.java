@@ -111,6 +111,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         int itemTop;
         int maxHeightItem = 0;
         row = new Row();
+        lineRows.clear();
         for (int i = 0; i < getItemCount(); i++) {
             Log.d(TAG, "index:" + i);
             View childAt = recycler.getViewForPosition(i);

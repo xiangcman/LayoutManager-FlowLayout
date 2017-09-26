@@ -26,6 +26,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private int usedMaxWidth;
     //竖直方向上的偏移量
     private int verticalScrollOffset = 0;
+
+    public int getTotalHeight() {
+        return totalHeight;
+    }
+
     //计算显示的内容的高度
     private int totalHeight = 0;
     private Row row = new Row();

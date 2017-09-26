@@ -22,5 +22,10 @@
         android:layout_height="wrap_content"
         android:text="不同高度文字式FlowLayout" />
 
+    <Button
+        android:id="@+id/product_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品属性界面" />
 
 </LinearLayout>

@@ -32,6 +32,11 @@ public class LanuchActivity extends Activity {
                 startActivity(new Intent(LanuchActivity.this, DiffHeightTextFlowActivity.class));
             }
         });
-
+        findViewById(R.id.product_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LanuchActivity.this, ProductActivity.class));
+            }
+        });
     }
 }

@@ -21,6 +21,12 @@ recyclerView.setLayoutManager(flowLayoutManager);
 recyclerView.setAdapter(new FlowAdapter());
 ```
 
+**常见商品属性界面:**
+
+![商品属性界面.png]https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/商品属性界面.png)
+
+使用:见[ProductActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/ProductActivity)
+
 **1.1版本:**
 
 修复重复操作数据问题

@@ -1,9 +1,7 @@
 package com.single.flowlayout;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -19,7 +17,6 @@ import com.library.flowlayout.FlowLayoutManager;
 import com.library.flowlayout.SpaceItemDecoration;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by xiangcheng on 17/9/26.
@@ -81,13 +78,12 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     class FlowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private List<String> list;
+        private List<Product.Classify.Des> list;
+        private Product.Classify.Des selectDes;
 
-        public FlowAdapter(List<String> list) {
+        public FlowAdapter(List<Product.Classify.Des> list) {
             this.list = list;
         }
-
-        SparseArray<Drawable> allDrawAble = new SparseArray<>();
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -97,24 +93,27 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             TextView textView = ((MyHolder) holder).text;
-            if (allDrawAble.get(position) == null) {
-                allDrawAble.put(position, getBack());
+
+            final Product.Classify.Des des = list.get(position);
+            if (des.isSelect) {
+                textView.setBackground(context.getResources().getDrawable(R.drawable.product_item_select_back));
+            } else {
+                textView.setBackground(context.getResources().getDrawable(R.drawable.product_item_back));
             }
-            textView.setBackgroundDrawable(allDrawAble.get(position));
-            textView.setText(list.get(position));
+            textView.setText(des.des);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, list.get(position), Toast.LENGTH_SHORT).show();
+                    if (des != selectDes) {
+                        if (selectDes != null) {
+                            selectDes.isSelect = false;
+                        }
+                    }
+                    des.isSelect = true;
+                    selectDes = des;
+                    notifyDataSetChanged();
                 }
             });
-        }
-
-        private Drawable getBack() {
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setCornerRadius(8);
-            drawable.setColor(Color.rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255)));
-            return drawable;
         }
 
         @Override

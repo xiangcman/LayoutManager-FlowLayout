@@ -95,6 +95,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         Log.d(TAG, "onLayoutChildren");
         if (getItemCount() == 0) {
             detachAndScrapAttachedViews(recycler);
+            verticalScrollOffset = 0;
             return;
         }
         if (state.isPreLayout()) {
@@ -117,6 +118,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         int maxHeightItem = 0;
         row = new Row();
         lineRows.clear();
+        allItemFrames.clear();
         for (int i = 0; i < getItemCount(); i++) {
             Log.d(TAG, "index:" + i);
             View childAt = recycler.getViewForPosition(i);

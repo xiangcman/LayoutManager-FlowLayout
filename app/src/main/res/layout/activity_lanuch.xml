@@ -28,4 +28,10 @@
         android:layout_height="wrap_content"
         android:text="商品属性界面" />
 
+    <Button
+        android:id="@+id/suspension_product_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="悬浮商品属性界面" />
+
 </LinearLayout>

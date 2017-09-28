@@ -1,17 +1,14 @@
 package com.single.flowlayout;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.library.flowlayout.FlowLayoutManager;
 import com.library.flowlayout.SpaceItemDecoration;
@@ -58,6 +55,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         });
 
+    }
+
+    public String getTitle(int position) {
+        return classifies.get(position).title;
     }
 
     @Override

@@ -15,13 +15,18 @@ import java.util.List;
  */
 
 public class ProductActivity extends AppCompatActivity {
+    private static final String TAG = ProductActivity.class.getSimpleName();
+    //    private TextView suspension;
+    protected RecyclerView productView;
+    protected List<Product.Classify> classifies = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        RecyclerView productView = (RecyclerView) findViewById(R.id.product_view);
+        productView = (RecyclerView) findViewById(R.id.product_view);
         productView.setLayoutManager(new LinearLayoutManager(this));
-        List<Product.Classify> classifies = new ArrayList<>();
+
         classifies.add(new Product.Classify("颜色", Arrays.asList(new Product.Classify.Des("红色"),
                 new Product.Classify.Des("白色"),
                 new Product.Classify.Des("蓝色"),
@@ -42,6 +47,26 @@ public class ProductActivity extends AppCompatActivity {
                         new Product.Classify.Des("潮流款"),
                         new Product.Classify.Des("儿童款"))));
         classifies.add(new Product.Classify("腰围", Arrays.asList(new Product.Classify.Des("26"),
+                new Product.Classify.Des("27"),
+                new Product.Classify.Des("28"),
+                new Product.Classify.Des("29"),
+                new Product.Classify.Des("30"),
+                new Product.Classify.Des("31"),
+                new Product.Classify.Des("32"),
+                new Product.Classify.Des("33"),
+                new Product.Classify.Des("34"),
+                new Product.Classify.Des("35"))));
+        classifies.add(new Product.Classify("肩宽", Arrays.asList(new Product.Classify.Des("26"),
+                new Product.Classify.Des("27"),
+                new Product.Classify.Des("28"),
+                new Product.Classify.Des("29"),
+                new Product.Classify.Des("30"),
+                new Product.Classify.Des("31"),
+                new Product.Classify.Des("32"),
+                new Product.Classify.Des("33"),
+                new Product.Classify.Des("34"),
+                new Product.Classify.Des("35"))));
+        classifies.add(new Product.Classify("臂长", Arrays.asList(new Product.Classify.Des("26"),
                 new Product.Classify.Des("27"),
                 new Product.Classify.Des("28"),
                 new Product.Classify.Des("29"),

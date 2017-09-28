@@ -38,5 +38,11 @@ public class LanuchActivity extends Activity {
                 startActivity(new Intent(LanuchActivity.this, ProductActivity.class));
             }
         });
+        findViewById(R.id.suspension_product_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LanuchActivity.this, SuspensionProductActivity.class));
+            }
+        });
     }
 }

@@ -6,12 +6,13 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#eeeeee"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/des"

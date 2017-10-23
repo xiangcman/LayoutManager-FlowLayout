@@ -118,18 +118,19 @@ public class TextFlowActivity extends AppCompatActivity {
 //                flowAdapter.notifyDataSetChanged();
                 //处理清空的实例
                 int size = list.size();
-                list.clear();
+                list.add(list.size() - 2, "新增的数据啊");
+//                list.clear();
                 flowAdapter.notifyDataSetChanged();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //处理清空的实例
-                        list.add("11.新增的");
-                        list.add("12.新增的");
-                        list.add("12.新增的");
-                        flowAdapter.notifyDataSetChanged();
-                    }
-                }, 2000);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //处理清空的实例
+//                        list.add("11.新增的");
+//                        list.add("12.新增的");
+//                        list.add("12.新增的");
+//                        flowAdapter.notifyDataSetChanged();
+//                    }
+//                }, 2000);
             }
         }, 2000);
     }

@@ -41,6 +41,10 @@ recyclerView.setAdapter(new FlowAdapter());
 
 修复重复操作数据错位以及暴露内容高度
 
+**1.3版本:**
+
+修复中间添加数据时错位问题
+
 **gradle依赖:**
 ```
 allprojects {
@@ -51,7 +55,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.2'
+        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.3'
 }
 ```
 

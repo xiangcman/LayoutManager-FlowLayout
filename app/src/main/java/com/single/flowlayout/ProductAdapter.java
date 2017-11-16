@@ -97,6 +97,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             final Product.Classify.Des des = list.get(position);
             if (des.isSelect) {
+                selectDes = des;
                 textView.setBackground(context.getResources().getDrawable(R.drawable.product_item_select_back));
             } else {
                 textView.setBackground(context.getResources().getDrawable(R.drawable.product_item_back));

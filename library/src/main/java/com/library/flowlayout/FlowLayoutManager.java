@@ -98,9 +98,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             verticalScrollOffset = 0;
             return;
         }
-        if (state.isPreLayout()) {
+        if (getChildCount() == 0 && state.isPreLayout()) {
             return;
         }
+        //onLayoutChildren方法在RecyclerView 初始化时 会执行两遍
+        detachAndScrapAttachedViews(recycler);
         if (getChildCount() == 0) {
             width = getWidth();
             height = getHeight();

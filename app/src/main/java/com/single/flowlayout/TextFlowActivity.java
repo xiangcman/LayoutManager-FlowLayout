@@ -34,60 +34,51 @@ public class TextFlowActivity extends AppCompatActivity {
             "7.(Visual) Basic",
             "8.Python",
             "9.Perl",
-            "10.JavaScript",
-            "11.Ruby",
-            "12.Visual Basic .NET",
-            "13.Transact-SQL",
-            "14.Lisp",
-            "15.Pascal",
-            "11.Ruby",
-            "12.Visual Basic .NET",
-            "13.Transact-SQL",
-            "14.Lisp",
-            "15.Pascal",
-            "16.Bash",
-            "17.PL/SQL",
-            "18.Delphi/Object Pascal",
-            "19.Ada",
-            "20.MATLAB", "1.C",
-            "2.Java",
-            "3.Objective-C",
-            "4.C++",
-            "5.PHP",
-            "6.C#",
-            "7.(Visual) Basic",
-            "8.Python",
-            "9.Perl",
-            "10.JavaScript",
-            "11.Ruby",
-            "12.Visual Basic .NET",
-            "13.Transact-SQL",
-            "14.Lisp",
-            "15.Pascal",
-            "16.Bash",
-            "17.PL/SQL",
-            "18.Delphi/Object Pascal",
-            "19.Ada",
-            "20.MATLAB", "1.C",
-            "2.Java",
-            "3.Objective-C",
-            "4.C++",
-            "5.PHP",
-            "6.C#",
-            "7.(Visual) Basic",
-            "8.Python",
-            "9.Perl",
-            "10.JavaScript",
-            "11.Ruby",
-            "12.Visual Basic .NET",
-            "13.Transact-SQL",
-            "14.Lisp",
-            "15.Pascal",
-            "16.Bash",
-            "17.PL/SQL",
-            "18.Delphi/Object Pascal",
-            "19.Ada",
-            "20.MATLAB"};
+            "10.JavaScript"
+
+    };
+    //            "17.PL/SQL",
+//            "18.Delphi/Object Pascal",
+//            "19.Ada",
+//            "20.MATLAB", "1.C",
+//            "2.Java",
+//            "3.Objective-C",
+//            "4.C++",
+//            "5.PHP",
+//            "6.C#",
+//            "7.(Visual) Basic",
+//            "8.Python",
+//            "9.Perl",
+//            "10.JavaScript",
+//            "11.Ruby",
+//            "12.Visual Basic .NET",
+//            "13.Transact-SQL",
+//            "14.Lisp",
+//            "15.Pascal",
+//            "16.Bash",
+//            "17.PL/SQL",
+//            "18.Delphi/Object Pascal",
+//            "19.Ada",
+//            "20.MATLAB", "1.C",
+//            "2.Java",
+//            "3.Objective-C",
+//            "4.C++",
+//            "5.PHP",
+//            "6.C#",
+//            "7.(Visual) Basic",
+//            "8.Python",
+//            "9.Perl",
+//            "10.JavaScript",
+//            "11.Ruby",
+//            "12.Visual Basic .NET",
+//            "13.Transact-SQL",
+//            "14.Lisp",
+//            "15.Pascal",
+//            "16.Bash",
+//            "17.PL/SQL",
+//            "18.Delphi/Object Pascal",
+//            "19.Ada",
+//            "20.MATLAB"
     private static final String TAG = TextFlowActivity.class.getSimpleName();
 
     private List<String> list = new ArrayList<>();
@@ -102,6 +93,7 @@ public class TextFlowActivity extends AppCompatActivity {
         setContentView(R.layout.flow_layout);
         final RecyclerView recyclerView = (RecyclerView) findViewById(flow);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+//        LinearLayoutManager flowLayoutManager = new LinearLayoutManager(this);
         recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         recyclerView.setLayoutManager(flowLayoutManager);
         list.addAll(Arrays.asList(arrays));
@@ -117,10 +109,11 @@ public class TextFlowActivity extends AppCompatActivity {
 //                list.add("12.新增的");
 //                flowAdapter.notifyDataSetChanged();
                 //处理清空的实例
-                int size = list.size();
-                list.add(list.size() - 2, "新增的数据啊");
+//                int size = list.size();
+//                list.add(list.size() - 2, "新增的数据啊");
 //                list.clear();
-                flowAdapter.notifyDataSetChanged();
+                list.remove(list.size() - 4);
+                flowAdapter.notifyItemRemoved(list.size() - 4);
 //                handler.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {

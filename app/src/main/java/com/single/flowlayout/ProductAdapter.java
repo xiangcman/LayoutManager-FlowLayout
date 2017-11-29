@@ -40,20 +40,20 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Product.Classify classify = classifies.get(position);
         final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) productHolder.des.getLayoutParams();
         lp.width = context.getResources().getDisplayMetrics().widthPixels;
-        final FlowLayoutManager1 flowLayoutManager = new FlowLayoutManager1();
+        final FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         productHolder.title.setText(classify.title);
         productHolder.des.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         productHolder.des.setLayoutManager(flowLayoutManager);
         productHolder.des.setAdapter(new FlowAdapter(classify.des));
-//        productHolder.des.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                productHolder.des.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//                Log.d(TAG, "flowLayoutManager.getTotalHeight():" + flowLayoutManager.getTotalHeight());
-//                lp.height = flowLayoutManager.getTotalHeight() + productHolder.des.getPaddingBottom() + productHolder.des.getPaddingTop();
-//                productHolder.des.setLayoutParams(lp);
-//            }
-//        });
+        productHolder.des.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                productHolder.des.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                Log.d(TAG, "flowLayoutManager.getTotalHeight():" + flowLayoutManager.getTotalHeight());
+                lp.height = flowLayoutManager.getTotalHeight() + productHolder.des.getPaddingBottom() + productHolder.des.getPaddingTop();
+                productHolder.des.setLayoutParams(lp);
+            }
+        });
 
     }
 

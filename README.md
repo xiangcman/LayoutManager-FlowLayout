@@ -34,7 +34,10 @@ recyclerView.setAdapter(new FlowAdapter());
 使用:见[SuspensionProductActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/SuspensionProductActivity.java)
 
 **动画修复:**
+
 ![动画修复.gif](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/动画演示.gif)
+
+使用:见[TextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/TextFlowActivity.java)
 
 **1.1版本:**
 

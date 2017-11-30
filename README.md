@@ -33,6 +33,9 @@ recyclerView.setAdapter(new FlowAdapter());
 
 使用:见[SuspensionProductActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/SuspensionProductActivity.java)
 
+**动画修复:**
+![动画修复.gif](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/动画演示.gif)
+
 **1.1版本:**
 
 修复重复操作数据问题
@@ -45,6 +48,10 @@ recyclerView.setAdapter(new FlowAdapter());
 
 修复中间添加数据时错位问题
 
+**1.4版本:**
+
+修复动画问题
+
 **gradle依赖:**
 ```
 allprojects {
@@ -55,7 +62,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.3'
+        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.4'
 }
 ```
 

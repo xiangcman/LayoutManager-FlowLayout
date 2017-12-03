@@ -84,10 +84,28 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
+//    public int getMaxItem() {
+//        return maxItem;
+//    }
+//
+//    private int maxItem;
+
+    public void setChildLayoutListener(ChildLayoutListener childLayoutListener) {
+        this.childLayoutListener = childLayoutListener;
+    }
+
+    private ChildLayoutListener childLayoutListener;
+
+    public interface ChildLayoutListener {
+        void onLayout(int maxChild);
+    }
+
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
         return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
+
+    private boolean hasMaxItem;
 
     //该方法主要用来获取每一个item在屏幕上占据的位置
     @Override
@@ -118,6 +136,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         int itemLeft;
         int itemTop;
         int maxHeightItem = 0;
+        int maxItem = 0;
         row = new Row();
         lineRows.clear();
         allItemFrames.clear();
@@ -133,6 +152,8 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             int childHeight = getDecoratedMeasuredHeight(childAt);
             int childUseWidth = childWidth;
             int childUseHeight = childHeight;
+//            Log.d(TAG, "cuLineWidth + childUseWidth:" + (cuLineWidth + childUseWidth));
+//            Log.d(TAG, "usedMaxWidth:" + usedMaxWidth);
             //如果加上当前的item还小于最大的宽度的话
             if (cuLineWidth + childUseWidth <= usedMaxWidth) {
                 itemLeft = left + cuLineWidth;
@@ -148,11 +169,22 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 row.addViews(new Item(childUseHeight, childAt, frame));
                 row.setCuTop(cuLineTop);
                 row.setMaxHeight(maxHeightItem);
+                if (totalHeight + childUseHeight > getVerticalSpace() && !hasMaxItem) {
+                    if (childLayoutListener != null) {
+                        Log.d(TAG, "越界的index:" + i);
+                        childLayoutListener.onLayout(i);
+                    }
+                    hasMaxItem = true;
+                }
             } else {
                 //换行
                 formatAboveRow();
+                //判断换行的时候item是否大于了总高度
                 cuLineTop += maxHeightItem;
                 totalHeight += maxHeightItem;
+                Log.d(TAG, "totalHeight:" + totalHeight);
+                Log.d(TAG, "getVerticalSpace:" + getVerticalSpace());
+
                 itemTop = cuLineTop;
                 itemLeft = left;
                 Rect frame = allItemFrames.get(i);
@@ -163,6 +195,12 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 allItemFrames.put(i, frame);
                 cuLineWidth = childUseWidth;
                 maxHeightItem = childUseHeight;
+                if (totalHeight + childUseHeight > getVerticalSpace() && !hasMaxItem) {
+                    if (childLayoutListener != null) {
+                        childLayoutListener.onLayout(i);
+                    }
+                    hasMaxItem = true;
+                }
                 row.addViews(new Item(childUseHeight, childAt, frame));
                 row.setCuTop(cuLineTop);
                 row.setMaxHeight(maxHeightItem);
@@ -175,7 +213,11 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
         }
         totalHeight = Math.max(totalHeight, getVerticalSpace());
+//        if (childLayoutListener != null) {
+//            childLayoutListener.onLayout(maxItem);
+//        }
         fillLayout(recycler, state);
+
     }
 
     //对出现在屏幕上的item进行展示，超出屏幕的item回收到缓存中
@@ -251,36 +293,35 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
      *
      * @return
      */
-    @Override
-    public boolean canScrollVertically() {
-        return true;
-    }
-
-    //监听竖直方向滑动的偏移量
-    @Override
-    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
-                                  RecyclerView.State state) {
-
-        Log.d("TAG", "totalHeight:" + totalHeight);
-        //实际要滑动的距离
-        int travel = dy;
-
-        //如果滑动到最顶部
-        if (verticalScrollOffset + dy < 0) {//限制滑动到顶部之后，不让继续向上滑动了
-            travel = -verticalScrollOffset;//verticalScrollOffset=0
-        } else if (verticalScrollOffset + dy > totalHeight - getVerticalSpace()) {//如果滑动到最底部
-            travel = totalHeight - getVerticalSpace() - verticalScrollOffset;//verticalScrollOffset=totalHeight - getVerticalSpace()
-        }
-
-        //将竖直方向的偏移量+travel
-        verticalScrollOffset += travel;
-
-        // 平移容器内的item
-        offsetChildrenVertical(-travel);
-        fillLayout(recycler, state);
-        return travel;
-    }
-
+//    @Override
+//    public boolean canScrollVertically() {
+//        return true;
+//    }
+//
+//    //监听竖直方向滑动的偏移量
+//    @Override
+//    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
+//                                  RecyclerView.State state) {
+//
+//        Log.d("TAG", "totalHeight:" + totalHeight);
+//        //实际要滑动的距离
+//        int travel = dy;
+//
+//        //如果滑动到最顶部
+//        if (verticalScrollOffset + dy < 0) {//限制滑动到顶部之后，不让继续向上滑动了
+//            travel = -verticalScrollOffset;//verticalScrollOffset=0
+//        } else if (verticalScrollOffset + dy > totalHeight - getVerticalSpace()) {//如果滑动到最底部
+//            travel = totalHeight - getVerticalSpace() - verticalScrollOffset;//verticalScrollOffset=totalHeight - getVerticalSpace()
+//        }
+//
+//        //将竖直方向的偏移量+travel
+//        verticalScrollOffset += travel;
+//
+//        // 平移容器内的item
+//        offsetChildrenVertical(-travel);
+//        fillLayout(recycler, state);
+//        return travel;
+//    }
     private int getVerticalSpace() {
         return self.getHeight() - self.getPaddingBottom() - self.getPaddingTop();
     }

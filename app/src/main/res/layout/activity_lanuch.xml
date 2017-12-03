@@ -34,4 +34,10 @@
         android:layout_height="wrap_content"
         android:text="悬浮商品属性界面" />
 
+    <Button
+        android:id="@+id/viewpage_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="分页效果" />
+
 </LinearLayout>

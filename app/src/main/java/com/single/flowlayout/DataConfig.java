@@ -133,4 +133,70 @@ public class DataConfig {
         showItems2.add(new ShowItem("徐宁"));
         return showItems2;
     }
+
+    public static List<ShowItem> getViewPagerItem() {
+        List<ShowItem> showItems = new ArrayList<>();
+        showItems.add(new ShowItem("1.C"));
+        showItems.add(new ShowItem("2.Java"));
+        showItems.add(new ShowItem("3.Objective-C"));
+        showItems.add(new ShowItem("4.C++"));
+        showItems.add(new ShowItem("5.PHP"));
+        showItems.add(new ShowItem("6.C#"));
+        showItems.add(new ShowItem("7.(Visual) Basic"));
+        showItems.add(new ShowItem("8.Python"));
+        showItems.add(new ShowItem("9.Perl"));
+        showItems.add(new ShowItem("10.JavaScript"));
+        showItems.add(new ShowItem("11.Ruby"));
+        showItems.add(new ShowItem("12.Visual Basic .NET"));
+        showItems.add(new ShowItem("13.Transact-SQL"));
+        showItems.add(new ShowItem("14.Lisp"));
+        showItems.add(new ShowItem("15.Pascal"));
+        showItems.add(new ShowItem("16.Bash"));
+        showItems.add(new ShowItem("17.PL/SQL"));
+        showItems.add(new ShowItem("18.Delphi/Object Pascal"));
+        showItems.add(new ShowItem("19.Ada"));
+        showItems.add(new ShowItem("20.MATLAB"));
+        showItems.add(new ShowItem("1.C"));
+        showItems.add(new ShowItem("2.Java"));
+        showItems.add(new ShowItem("3.Objective-C"));
+        showItems.add(new ShowItem("4.C++"));
+        showItems.add(new ShowItem("5.PHP"));
+        showItems.add(new ShowItem("6.C#"));
+        showItems.add(new ShowItem("7.(Visual) Basic"));
+        showItems.add(new ShowItem("8.Python"));
+        showItems.add(new ShowItem("9.Perl"));
+        showItems.add(new ShowItem("10.JavaScript"));
+        showItems.add(new ShowItem("11.Ruby"));
+        showItems.add(new ShowItem("12.Visual Basic .NET"));
+        showItems.add(new ShowItem("13.Transact-SQL"));
+        showItems.add(new ShowItem("14.Lisp"));
+        showItems.add(new ShowItem("15.Pascal"));
+        showItems.add(new ShowItem("16.Bash"));
+        showItems.add(new ShowItem("17.PL/SQL"));
+        showItems.add(new ShowItem("18.Delphi/Object Pascal"));
+        showItems.add(new ShowItem("19.Ada"));
+        showItems.add(new ShowItem("20.MATLAB"));
+        showItems.add(new ShowItem("1.C"));
+        showItems.add(new ShowItem("2.Java"));
+        showItems.add(new ShowItem("3.Objective-C"));
+        showItems.add(new ShowItem("4.C++"));
+        showItems.add(new ShowItem("5.PHP"));
+        showItems.add(new ShowItem("6.C#"));
+        showItems.add(new ShowItem("7.(Visual) Basic"));
+        showItems.add(new ShowItem("8.Python"));
+        showItems.add(new ShowItem("9.Perl"));
+        showItems.add(new ShowItem("10.JavaScript"));
+        showItems.add(new ShowItem("11.Ruby"));
+        showItems.add(new ShowItem("12.Visual Basic .NET"));
+        showItems.add(new ShowItem("13.Transact-SQL"));
+        showItems.add(new ShowItem("14.Lisp"));
+        showItems.add(new ShowItem("15.Pascal"));
+        showItems.add(new ShowItem("16.Bash"));
+        showItems.add(new ShowItem("17.PL/SQL"));
+        showItems.add(new ShowItem("18.Delphi/Object Pascal"));
+        showItems.add(new ShowItem("19.Ada"));
+        showItems.add(new ShowItem("20.MATLAB"));
+
+        return showItems;
+    }
 }

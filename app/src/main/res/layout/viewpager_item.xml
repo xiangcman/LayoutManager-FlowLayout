@@ -2,6 +2,6 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="@dimen/viewpage_height">
 
 </android.support.v7.widget.RecyclerView>

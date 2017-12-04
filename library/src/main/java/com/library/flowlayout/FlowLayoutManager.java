@@ -2,7 +2,6 @@ package com.library.flowlayout;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +111,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     //该方法主要用来获取每一个item在屏幕上占据的位置
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        Log.d(TAG, "onLayoutChildren");
         if (getItemCount() == 0) {
             detachAndScrapAttachedViews(recycler);
             verticalScrollOffset = 0;
@@ -144,7 +142,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         allItemFrames.clear();
         removeAllViews();
         for (int i = 0; i < getItemCount(); i++) {
-            Log.d(TAG, "index:" + i);
             View childAt = recycler.getViewForPosition(i);
             if (View.GONE == childAt.getVisibility()) {
                 continue;
@@ -173,7 +170,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 row.setMaxHeight(maxHeightItem);
                 if (totalHeight + childUseHeight > getVerticalSpace() && !hasMaxItem) {
                     if (childLayoutListener != null) {
-                        Log.d(TAG, "越界的index:" + i);
                         childLayoutListener.onLayout(i, lineRows.size());
                     }
                     hasMaxItem = true;
@@ -184,8 +180,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 //判断换行的时候item是否大于了总高度
                 cuLineTop += maxHeightItem;
                 totalHeight += maxHeightItem;
-                Log.d(TAG, "totalHeight:" + totalHeight);
-                Log.d(TAG, "getVerticalSpace:" + getVerticalSpace());
 
                 itemTop = cuLineTop;
                 itemLeft = left;
@@ -305,8 +299,6 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
                                   RecyclerView.State state) {
-
-        Log.d("TAG", "totalHeight:" + totalHeight);
         //实际要滑动的距离
         int travel = dy;
 

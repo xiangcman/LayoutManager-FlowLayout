@@ -39,6 +39,12 @@ recyclerView.setAdapter(new FlowAdapter());
 
 使用:见[TextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/TextFlowActivity.java)
 
+**viewpager中流式布局应用:**
+
+![viewpager中流式布局.gif](http://upload-images.jianshu.io/upload_images/2528336-e617484b3d42dc85.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+使用:见[ViewPagerActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/vp_flow/app/src/main/java/com/single/flowlayout/ViewPagerActivity.java)
+
 **1.1版本:**
 
 修复重复操作数据问题

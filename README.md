@@ -33,6 +33,12 @@ recyclerView.setAdapter(new FlowAdapter());
 
 使用:见[SuspensionProductActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/SuspensionProductActivity.java)
 
+**常见viewpager中流式布局界面:**
+
+![viewpager中流式布局界面.gif](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/viewpager中流式布局.gif)
+
+使用:见[ViewPagerActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/ViewPagerActivity.java)
+
 **1.1版本:**
 
 修复重复操作数据问题

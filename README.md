@@ -61,7 +61,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.3'
+        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.4'
 }
 ```
 

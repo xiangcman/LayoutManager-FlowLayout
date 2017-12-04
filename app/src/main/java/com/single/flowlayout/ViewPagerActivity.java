@@ -65,7 +65,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                         Log.d(TAG, "lineSize:" + lineSize);
                         vpi.invalidate(viewPagerItem.subList(0, maxItem));
                         getItems();
-                        int pageSize = 0;
+                        int pageSize;
                         if (totalLine % lineSize == 0) {
                             pageSize = totalLine / lineSize;
                         } else {

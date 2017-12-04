@@ -18,34 +18,34 @@ import com.library.flowlayout.SpaceItemDecoration;
 
 public class PhotoFlowActivity extends Activity {
     private static final String arrays[] = new String[]{
-            "http://a4.topitme.com/l/201101/25/12959386712894.jpg",
-            "http://a4.topitme.com/l/201009/29/12857488431166.jpg",
-            "http://a4.topitme.com/o/201005/20/12743682354851.jpg",
-            "http://a4.topitme.com/o/201002/07/12655476187814.jpg",
-            "http://a4.topitme.com/l/201008/24/12826372628592.jpg",
-            "http://a4.topitme.com/o/201010/25/12879776661298.jpg",
-            "http://a4.topitme.com/l/201006/13/12764179535658.jpg",
-            "http://a4.topitme.com/o/201010/07/12864139597040.jpg",
-            "http://a4.topitme.com/l/200911/02/12571660288201.jpg",
-            "http://a4.topitme.com/l/201010/25/12879982826170.jpg",
-            "http://a4.topitme.com/l/201005/28/12750473483199.jpg",
-            "http://a3.topitme.com/9/75/b6/11662807867c2b6759o.jpg",
-            "http://a4.topitme.com/l/201012/08/12918172069789.jpg",
-            "http://a4.topitme.com/l/200912/16/12609717687530.jpg",
-            "http://a4.topitme.com/l154/101545352827be1f30.jpg",
-            "http://a4.topitme.com/l/201007/03/12781348268956.jpg",
-            "http://a4.topitme.com/l/201101/10/12946618524338.jpg",
-            "http://a4.topitme.com/o/201010/07/12864139597040.jpg",
-            "http://a4.topitme.com/l/201007/12/12789053047620.jpg",
-            "http://a4.topitme.com/o/201002/02/12650420481465.jpg",
-            "http://a4.topitme.com/l/201005/10/12735029693898.jpg",
-            "http://a4.topitme.com/l085/10085746325d398b87.jpg",
-            "http://a4.topitme.com/l/200911/07/12575707872040.jpg",
-            "http://a4.topitme.com/o/201008/26/12827937063388.jpg",
-            "http://a4.topitme.com/l/200911/07/12575708578130.jpg",
-            "http://a4.topitme.com/l/201004/13/12711383653212.jpg",
-            "http://a4.topitme.com/l/200912/10/12604112121802.jpg",
-            "http://a4.topitme.com/l/201005/17/12740893805467.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_e_t_o_n_se_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_e_th_t_th_o_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_e_th_th_f_o_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_fi_z_se_o_se_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_t_fi_t_n_f_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_n_e_se_t_n_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/anyixuan/www.n63.com_dr_e_n_fi_e_e_se_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/ASOSxxy/n63.com_bx_e_z_f_th_se_se_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/ASOSxxy/n63.com_bx_f_se_fi_e_se_f_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/ASOSxxy/n63.com_bx_n_f_e_t_th_fi_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/ASOSxxy/n63.com_bx_n_n_z_f_e_th_ll.jpg",
+            "http://www.n63.com/photodir/img.php/thumbnail//china/ASOSxxy/n63.com_bx_o_z_e_t_t_f_ll.jpg",
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1976293921,1270633268&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=779788657,4292815127&fm=11&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2290067343,2226788365&fm=11&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4060653417,3747803775&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1992761446,3362001450&fm=27&gp=0.jpg",
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2633672070,3783912955&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=362114848,334146577&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=88285253,4228312326&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=767238045,2403790718&fm=27&gp=0.jpg",
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=689631514,1944017813&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3987323356,2095973354&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1684173933,1618093809&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=945145300,1358809878&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3467999029,290220372&fm=27&gp=0.jpg",
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1227784623,1033224162&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4196341137,3654139365&fm=27&gp=0.jpg",
     };
 
     @Override
@@ -54,7 +54,7 @@ public class PhotoFlowActivity extends Activity {
         setContentView(R.layout.activity_photo_flow);
         RecyclerView viewById = (RecyclerView) findViewById(R.id.photo_layout);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-        viewById.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
+        viewById.addItemDecoration(new SpaceItemDecoration(dp2px(5)));
         viewById.setLayoutManager(flowLayoutManager);
         viewById.setAdapter(new FlowAdapter());
     }

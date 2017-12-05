@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -48,13 +49,29 @@ public class ViewPagerActivity extends AppCompatActivity {
         fm.setChildLayoutListener(new FlowLayoutManager.ChildLayoutListener() {
             @Override
             public void onLayout(int maxChild, int lineSize) {
-
+                Log.d(TAG, "onLayout lineSize:" + lineSize);
+                pageLine = lineSize;
             }
 
             @Override
             public void end(final int lineCount) {
                 Log.d(TAG, "totalLine:" + lineCount);
-                totalLine = lineCount;
+                Log.d(TAG, "pageLine:" + pageLine);
+                int pageSize;
+                if (lineCount % pageLine == 0) {
+                    pageSize = lineCount / pageLine;
+                } else {
+                    pageSize = lineCount / pageLine + 1;
+                }
+                curIndex = 0;
+                caculateIndicator(pageSize);
+
+                Log.d(TAG, "caculateIndicator");
+
+                fm.removeAllViews();
+                ((ViewGroup) findViewById(R.id.fill_content)).removeView(rv);
+                ((ViewGroup) findViewById(android.R.id.content)).removeView(findViewById(R.id.fill_content));
+
                 final ViewPagerItemView vpi = new ViewPagerItemView(ViewPagerActivity.this, viewPagerItem);
                 viewPagerItemViews = new ArrayList<>();
                 viewPagerItemViews.add(vpi.getView());
@@ -65,16 +82,6 @@ public class ViewPagerActivity extends AppCompatActivity {
                         Log.d(TAG, "lineSize:" + lineSize);
                         vpi.invalidate(viewPagerItem.subList(0, maxItem));
                         getItems();
-                        int pageSize;
-                        if (totalLine % lineSize == 0) {
-                            pageSize = totalLine / lineSize;
-                        } else {
-                            pageSize = totalLine / lineSize + 1;
-                        }
-                        curIndex = 0;
-                        caculateIndicator(pageSize);
-                        fm.removeAllViews();
-                        rv.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -110,7 +117,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         });
     }
 
-    private int totalLine;
+    private int pageLine;
 
     List<ShowItem> showItems;
 
@@ -154,7 +161,9 @@ public class ViewPagerActivity extends AppCompatActivity {
                 img.setImageResource(R.drawable.indicator_normal);
             }
             img.setPadding(8, 8, 8, 8);
+            Log.d(TAG, "索引:" + i + "添加了");
             indicator.addView(img);
+            indicator.requestFocus();
             indicatorImgs.add(img);
         }
     }

@@ -5,12 +5,6 @@
     android:background="#eeeeee"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/data_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/viewpage_height">
@@ -32,5 +26,19 @@
             android:visibility="visible" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/fill_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/viewpage_height"
+        android:visibility="invisible">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/data_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/viewpage_height"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
 </RelativeLayout>

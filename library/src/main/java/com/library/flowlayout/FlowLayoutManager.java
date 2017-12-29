@@ -20,7 +20,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private static final String TAG = FlowLayoutManager.class.getSimpleName();
     final FlowLayoutManager self = this;
 
-    private int width, height;
+    protected int width, height;
     private int left, top, right;
     //最大容器的宽度
     private int usedMaxWidth;
@@ -32,7 +32,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     }
 
     //计算显示的内容的高度
-    private int totalHeight = 0;
+    protected int totalHeight = 0;
     private Row row = new Row();
     private List<Row> lineRows = new ArrayList<>();
 

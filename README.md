@@ -13,8 +13,18 @@
 ### 使用:
 **详见[TextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/TextFlowActivity.java)、[DiffHeightTextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/DiffHeightTextFlowActivity.java)、[PhotoFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/app/src/main/java/com/single/flowlayout/PhotoFlowActivity.java)**
 ```
-RecyclerView recyclerView = (RecyclerView) findViewById(flow);
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flow);
 FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+//设置每一个item间距
+recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
+recyclerView.setLayoutManager(flowLayoutManager);
+recyclerView.setAdapter(new FlowAdapter());
+```
+
+**RV嵌套RV高度问题:**
+```
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flow);
+MeasureFlowLayoutManager flowLayoutManager = new MeasureFlowLayoutManager(context);
 //设置每一个item间距
 recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
 recyclerView.setLayoutManager(flowLayoutManager);
@@ -61,6 +71,10 @@ recyclerView.setAdapter(new FlowAdapter());
 
 修复动画问题
 
+**1.5版本:**
+
+添加RV嵌套RV时wrap_content不显示问题，请使用[MeasureFlowLayoutManager](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/library/src/main/java/com/library/flowlayout/MeasureFlowLayoutManager.java)
+
 **gradle依赖:**
 ```
 allprojects {
@@ -71,7 +85,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.4'
+        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.5'
 }
 ```
 

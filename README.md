@@ -91,7 +91,9 @@ dependencies {
 
 **欢迎大家提出问题，留言板留言或邮箱直接联系我。我会第一时间测试相关的bug**
 
-**欢迎客官到本店光临:**`184793647`(qq群)       
+**欢迎客官到本店光临(qq群):
+![qq群](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/IMG_0221.jpg)
+
        
 ### 关于我:
 

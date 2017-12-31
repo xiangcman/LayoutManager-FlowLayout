@@ -93,8 +93,7 @@ dependencies {
 
 **欢迎客官到本店光临(qq群):
 
-![qq群](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/IMG_0221.jpg)
-
+<image src="https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/IMG_0221.jpg" width="250" width="250" title="qq群"/>
        
 ### 关于我:
 

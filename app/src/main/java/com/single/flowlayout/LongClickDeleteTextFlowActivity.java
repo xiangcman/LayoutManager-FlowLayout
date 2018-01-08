@@ -51,6 +51,7 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (touchRv) {
                             flowAdapter.refreshSelect();
+                            touchRv = false;
                         }
                     }
                 }
@@ -76,6 +77,8 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+            Log.d(TAG, "position:" + position);
+            Log.d(TAG, "list.get(position).des:" + list.get(position).des);
             final TextView textView = ((MyHolder) holder).text;
             textView.setBackgroundDrawable(list.get(position).color);
             textView.setText(list.get(position).des);
@@ -109,9 +112,15 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
                             Log.d(TAG, "position:" + position);
                             Log.d(TAG, "selectPosition:" + selectPosition);
                             if (position == selectPosition) {
+                                RecyclerView.ViewHolder viewHolderForAdapterPosition = recyclerView.findViewHolderForAdapterPosition(selectPosition);
+                                TextView selectTv = ((MyHolder) viewHolderForAdapterPosition).text;
+                                ViewGroup.LayoutParams lp = selectTv.getLayoutParams();
+                                lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                                textView.setLayoutParams(lp);
                                 list.remove(position);
                                 notifyItemRemoved(position);
-                                flowAdapter.notifyItemRangeChanged(position, list.size() - position);
+                                notifyItemRangeChanged(position, list.size() - position);
                                 selectPosition = -1;
                             } else {
                                 if (selectPosition != -1) {
@@ -146,6 +155,7 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
                 selectTv.setBackgroundDrawable(list.get(selectPosition).color);
                 selectTv.setText(list.get(selectPosition).des);
                 list.get(selectPosition).isSelect = false;
+                selectPosition = -1;
             }
         }
 

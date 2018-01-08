@@ -50,5 +50,11 @@ public class LanuchActivity extends Activity {
                 startActivity(new Intent(LanuchActivity.this, ViewPagerActivity.class));
             }
         });
+        findViewById(R.id.longclick_delete_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LanuchActivity.this, LongClickDeleteTextFlowActivity.class));
+            }
+        });
     }
 }

@@ -25,6 +25,7 @@
         <activity android:name=".ProductActivity" />
         <activity android:name=".SuspensionProductActivity" />
         <activity android:name=".ViewPagerActivity" />
+        <activity android:name=".LongClickDeleteTextFlowActivity" />
 
     </application>
 

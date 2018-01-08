@@ -40,4 +40,10 @@
         android:layout_height="wrap_content"
         android:text="分页效果" />
 
+    <Button
+        android:id="@+id/longclick_delete_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="长点击删除效果" />
+
 </LinearLayout>

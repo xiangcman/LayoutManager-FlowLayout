@@ -12,6 +12,7 @@ import java.util.Random;
 public class ShowItem {
     public Drawable color;
     public String des;
+    public boolean isSelect;
 
     public ShowItem(String des) {
         this.des = des;

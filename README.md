@@ -23,8 +23,8 @@ recyclerView.setAdapter(new FlowAdapter());
 
 **RV嵌套RV高度问题:**
 ```
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flow);
-MeasureFlowLayoutManager flowLayoutManager = new MeasureFlowLayoutManager(context);
+NestedRecyclerView recyclerView = (NestedRecyclerView) findViewById(R.id.flow);
+FlowLayoutManager flowLayoutManager = new FlowLayoutManager(context);
 //设置每一个item间距
 recyclerView.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
 recyclerView.setLayoutManager(flowLayoutManager);
@@ -79,7 +79,11 @@ recyclerView.setAdapter(new FlowAdapter());
 
 **1.5版本:**
 
-添加RV嵌套RV时wrap_content不显示问题，请使用[MeasureFlowLayoutManager](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/library/src/main/java/com/library/flowlayout/MeasureFlowLayoutManager.java)
+添加RV嵌套RV时wrap_content不显示问题
+
+**1.6版本:**
+
+解决某些机型在wrap_content不显示问题
 
 **gradle依赖:**
 ```
@@ -91,7 +95,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.5'
+        compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.6'
 }
 ```
 

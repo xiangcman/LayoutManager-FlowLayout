@@ -27,6 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.5'
-//    compile project(':library')
+//    compile 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.5'
+    compile project(':library')
 }

@@ -14,7 +14,7 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp" />
 
-    <android.support.v7.widget.RecyclerView
+    <com.library.flowlayout.NestedRecyclerView
         android:id="@+id/des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

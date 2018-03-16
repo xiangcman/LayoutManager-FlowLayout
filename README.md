@@ -105,7 +105,7 @@ dependencies {
 
 **demo第一时间体验:**
 
-<image src="https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/master/photos/demo.jpg" width="250" width="250"/>
+<image src="https://github.com/xiangcman/LayoutManager-FlowLayout/blob/master/photos/demo.png" width="250" width="250"/>
 
 
 **欢迎大家提出问题，留言板留言或邮箱直接联系我。我会第一时间测试相关的bug**

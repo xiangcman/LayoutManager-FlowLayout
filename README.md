@@ -59,6 +59,10 @@ recyclerView.setAdapter(new FlowAdapter());
 
 ![长点击删除界面.gif](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/vp_flow/photos/长点击删除界面.gif)
 
+- 长点击删除图片问题
+
+![长点击显示删除图片界面.gif](https://github.com/xiangcman/LayoutManager-FlowLayout/tree/master/photos/长点击显示删除图片界面.gif)
+
 使用:见[LongClickDeleteTextFlowActivity](https://github.com/1002326270xc/LayoutManager-FlowLayout/blob/vp_flow/app/src/main/java/com/single/flowlayout/LongClickDeleteTextFlowActivity.java)
 
 **1.1版本:**

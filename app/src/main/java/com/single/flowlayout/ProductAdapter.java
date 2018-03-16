@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.library.flowlayout.FlowLayoutManager;
-import com.library.flowlayout.MeasureFlowLayoutManager;
 import com.library.flowlayout.SpaceItemDecoration;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Product.Classify classify = classifies.get(position);
         final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) productHolder.des.getLayoutParams();
         lp.width = context.getResources().getDisplayMetrics().widthPixels;
-        final MeasureFlowLayoutManager flowLayoutManager = new MeasureFlowLayoutManager(context);
+        final FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         productHolder.title.setText(classify.title);
         productHolder.des.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
         productHolder.des.setLayoutManager(flowLayoutManager);

@@ -32,6 +32,8 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
     private boolean touchRv;
     RecyclerView recyclerView;
 
+    private boolean deleteShowText = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,14 +95,18 @@ public class LongClickDeleteTextFlowActivity extends AppCompatActivity {
                     holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            if (!list.get(position).isSelect) {
-                                textView.setBackgroundDrawable(getBack());
-                                textView.setText("删除");
-                                layoutParams.width = width;
-                                layoutParams.height = height;
-                                textView.setLayoutParams(layoutParams);
-                                list.get(position).isSelect = true;
-                                selectPosition = position;
+                            if (position != selectPosition) {
+                                if (selectPosition == -1) {
+                                    if (!list.get(position).isSelect) {
+                                        textView.setBackgroundDrawable(deleteShowText ? getBack() : new DeleteDrawable(LongClickDeleteTextFlowActivity.this));
+                                        textView.setText(deleteShowText ? "删除" : null);
+                                        layoutParams.width = width;
+                                        layoutParams.height = height;
+                                        textView.setLayoutParams(layoutParams);
+                                        list.get(position).isSelect = true;
+                                        selectPosition = position;
+                                    }
+                                }
                             }
                             touchRv = false;
                             return true;

@@ -93,6 +93,17 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         Log.d(TAG, "onLayoutChildren");
+        totalHeight = 0;
+        int cuLineTop = top;
+        //当前行使用的宽度
+        int cuLineWidth = 0;
+        int itemLeft;
+        int itemTop;
+        int maxHeightItem = 0;
+        row = new Row();
+        lineRows.clear();
+        allItemFrames.clear();
+        removeAllViews();
         if (getItemCount() == 0) {
             detachAndScrapAttachedViews(recycler);
             verticalScrollOffset = 0;
@@ -111,17 +122,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             top = getPaddingTop();
             usedMaxWidth = width - left - right;
         }
-        totalHeight = 0;
-        int cuLineTop = top;
-        //当前行使用的宽度
-        int cuLineWidth = 0;
-        int itemLeft;
-        int itemTop;
-        int maxHeightItem = 0;
-        row = new Row();
-        lineRows.clear();
-        allItemFrames.clear();
-        removeAllViews();
+
         for (int i = 0; i < getItemCount(); i++) {
             Log.d(TAG, "index:" + i);
             View childAt = recycler.getViewForPosition(i);
@@ -175,6 +176,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
         }
         totalHeight = Math.max(totalHeight, getVerticalSpace());
+        Log.d(TAG, "onLayoutChildren totalHeight:" + totalHeight);
         fillLayout(recycler, state);
     }
 

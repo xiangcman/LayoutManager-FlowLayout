@@ -41,32 +41,34 @@ public class TextFlowActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                int position = list.size() - 4;
-                list.remove(position);
-
-                flowAdapter.notifyItemRemoved(position);
-                flowAdapter.notifyItemRangeChanged(position, list.size() - position);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        int start = list.size();
-                        list.add(new ShowItem("新增的1"));
-                        list.add(new ShowItem("新增的2"));
-                        list.add(new ShowItem("新增的3"));
-                        flowAdapter.notifyItemInserted(start);
-                        flowAdapter.notifyItemRangeChanged(start, list.size() - start);
-
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                int start = list.size() / 2;
-                                list.add(start, new ShowItem("中间添加的数据"));
-                                flowAdapter.notifyItemInserted(start);
-                                flowAdapter.notifyItemRangeChanged(start, list.size() - start);
-                            }
-                        }, 2000);
-                    }
-                }, 2000);
+                list.clear();
+                flowAdapter.notifyDataSetChanged();
+//                int position = list.size() - 4;
+//                list.remove(position);
+//
+//                flowAdapter.notifyItemRemoved(position);
+//                flowAdapter.notifyItemRangeChanged(position, list.size() - position);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        int start = list.size();
+//                        list.add(new ShowItem("新增的1"));
+//                        list.add(new ShowItem("新增的2"));
+//                        list.add(new ShowItem("新增的3"));
+//                        flowAdapter.notifyItemInserted(start);
+//                        flowAdapter.notifyItemRangeChanged(start, list.size() - start);
+//
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                int start = list.size() / 2;
+//                                list.add(start, new ShowItem("中间添加的数据"));
+//                                flowAdapter.notifyItemInserted(start);
+//                                flowAdapter.notifyItemRangeChanged(start, list.size() - start);
+//                            }
+//                        }, 2000);
+//                    }
+//                }, 2000);
             }
         }, 2000);
     }

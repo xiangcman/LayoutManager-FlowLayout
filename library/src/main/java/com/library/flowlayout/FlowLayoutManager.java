@@ -182,7 +182,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
     //对出现在屏幕上的item进行展示，超出屏幕的item回收到缓存中
     private void fillLayout(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        if (state.isPreLayout()) { // 跳过preLayout，preLayout主要用于支持动画
+        if (state.isPreLayout() || getItemCount() == 0) { // 跳过preLayout，preLayout主要用于支持动画
             return;
         }
 
@@ -196,28 +196,28 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             float lineTop = row.cuTop;
             float lineBottom = lineTop + row.maxHeight;
             //如果该行在屏幕中，进行放置item
-            if (lineTop < displayFrame.bottom && displayFrame.top < lineBottom) {
-                List<Item> views = row.views;
-                for (int i = 0; i < views.size(); i++) {
-                    View scrap = views.get(i).view;
-                    measureChildWithMargins(scrap, 0, 0);
-                    addView(scrap);
-                    Rect frame = views.get(i).rect;
-                    //将这个item布局出来
-                    layoutDecoratedWithMargins(scrap,
-                            frame.left,
-                            frame.top - verticalScrollOffset,
-                            frame.right,
-                            frame.bottom - verticalScrollOffset);
-                }
-            } else {
-                //将不在屏幕中的item放到缓存中
-                List<Item> views = row.views;
-                for (int i = 0; i < views.size(); i++) {
-                    View scrap = views.get(i).view;
-                    removeAndRecycleView(scrap, recycler);
-                }
+//            if (lineTop < displayFrame.bottom && displayFrame.top < lineBottom) {
+            List<Item> views = row.views;
+            for (int i = 0; i < views.size(); i++) {
+                View scrap = views.get(i).view;
+                measureChildWithMargins(scrap, 0, 0);
+                addView(scrap);
+                Rect frame = views.get(i).rect;
+                //将这个item布局出来
+                layoutDecoratedWithMargins(scrap,
+                        frame.left,
+                        frame.top - verticalScrollOffset,
+                        frame.right,
+                        frame.bottom - verticalScrollOffset);
             }
+//            } else {
+//                //将不在屏幕中的item放到缓存中
+//                List<Item> views = row.views;
+//                for (int i = 0; i < views.size(); i++) {
+//                    View scrap = views.get(i).view;
+//                    removeAndRecycleView(scrap, recycler);
+//                }
+//            }
         }
     }
 

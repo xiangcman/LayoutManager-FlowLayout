@@ -37,13 +37,18 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final ProductHolder productHolder = (ProductHolder) holder;
+
         Product.Classify classify = classifies.get(position);
         final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) productHolder.des.getLayoutParams();
         lp.width = context.getResources().getDisplayMetrics().widthPixels;
         final FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         productHolder.title.setText(classify.title);
-        productHolder.des.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
+        if (productHolder.itemView.getTag() == null) {
+            productHolder.des.addItemDecoration(new SpaceItemDecoration(dp2px(10)));
+            productHolder.itemView.setTag("item");
+        }
         productHolder.des.setLayoutManager(flowLayoutManager);
+
         productHolder.des.setAdapter(new FlowAdapter(classify.des));
     }
 
@@ -65,6 +70,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             title = (TextView) itemView.findViewById(R.id.title);
             des = (RecyclerView) itemView.findViewById(R.id.des);
         }
+
     }
 
     class FlowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

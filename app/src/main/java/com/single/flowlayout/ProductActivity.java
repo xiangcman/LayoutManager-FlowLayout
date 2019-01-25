@@ -1,6 +1,8 @@
 package com.single.flowlayout;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,8 @@ public class ProductActivity extends AppCompatActivity {
     //    private TextView suspension;
     protected RecyclerView productView;
     protected List<Product.Classify> classifies = new ArrayList<>();
+    private Handler handler = new Handler(Looper.myLooper());
+    private ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +80,22 @@ public class ProductActivity extends AppCompatActivity {
                 new Product.Classify.Des("33"),
                 new Product.Classify.Des("34"),
                 new Product.Classify.Des("35"))));
-        productView.setAdapter(new ProductAdapter(this, classifies));
+        productView.setAdapter(productAdapter = new ProductAdapter(this, classifies));
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                classifies.add(new Product.Classify("颜色", Arrays.asList(new Product.Classify.Des("红色"),
+                        new Product.Classify.Des("白色"),
+                        new Product.Classify.Des("蓝色"),
+                        new Product.Classify.Des("橘黄色"),
+                        new Product.Classify.Des("格调灰"),
+                        new Product.Classify.Des("深色"),
+                        new Product.Classify.Des("咖啡色"))));
+                productAdapter.notifyDataSetChanged();
+
+            }
+        }, 1000);
     }
 
 }
